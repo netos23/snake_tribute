@@ -158,6 +158,7 @@ if __name__ == '__main__':
 	# Цикл игры
 	running = True
 	pause = True
+	fail = False
 	while running:
 		# Держим цикл на правильной скорости
 		clock.tick(FPS)
@@ -181,7 +182,9 @@ if __name__ == '__main__':
 				if event.key == pygame.K_SPACE:
 					pause = not pause
 
-		if not pause:
+				# if event.key == pygame.K_r:
+
+		if not pause and not fail:
 			# Обновление логики
 			action = snake.next_action(game_field)
 			if action == MOVE:
@@ -199,7 +202,8 @@ if __name__ == '__main__':
 				snake_sprites.add(Rectangle(0, 0, cell_w, cell_h))
 			else:
 				print('Snake dead')
-				running = not running
+				# running = not running
+				fail = True
 
 			# Отчистка поля и его заполнение
 			game_field = [[0 for _ in range(FIELD_WIDTH)] for _ in range(FIELD_HEIGHT)]
